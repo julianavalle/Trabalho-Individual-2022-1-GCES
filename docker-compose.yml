@@ -14,18 +14,29 @@ services:
   app:
     build: 
       context: library_back/
-      dockerfile: Dockerfile
+      dockerfile: django.Dockerfile
     volumes:
       - ./library_back:/django
     ports:
       - 8000:8000
     image: app:django
-    container_name: django_container
+    container_name: back
     command: python manage.py runserver 0.0.0.0:8000
     depends_on:
       - db
-    
-      
+
+  front:
+    build:
+      context: library_front/
+      dockerfile: node.Dockerfile
+    volumes:
+      - ./library_back:/node
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
+    container_name: front
+   
 volumes:
   postgres_data:
 
