@@ -30,12 +30,23 @@ services:
       context: library_front/
       dockerfile: node.Dockerfile
     volumes:
-      - ./library_back:/node
+      - ./library_front:/node
     ports:
       - 3000:3000
     depends_on:
       - db
     container_name: front
+  
+  nginx:
+    build:
+      context: nginx/
+      dockerfile: nginx.Dockerfile
+    ports:
+      - 80:80
+    depends_on:
+      - front
+    container_name: nginx
+  
    
 volumes:
   postgres_data:
