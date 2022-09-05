@@ -23,6 +23,9 @@ services:
     container_name: back
     depends_on:
       - db
+    entrypoint: /usr/bin/entrypoint.sh
+
+    command: sh ENTRYPOINT
 
   front:
     build:
