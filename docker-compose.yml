@@ -21,7 +21,6 @@ services:
       - 8000:8000
     image: app:django
     container_name: back
-    command: python manage.py runserver 0.0.0.0:8000
     depends_on:
       - db
 
