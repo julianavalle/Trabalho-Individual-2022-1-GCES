@@ -37,7 +37,7 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          python -m pip install --upgrade pip
+          cd library_back
           pip install -r requirements.txt
 
       - name: Migrate
