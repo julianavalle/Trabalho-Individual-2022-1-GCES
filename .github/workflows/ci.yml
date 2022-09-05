@@ -11,7 +11,23 @@ env:
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
+
   build:
+   runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        
+      - name: Docker Compose up
+        run: docker compose up -d
+
+        
+  backend:
     runs-on: ubuntu-latest
 
     container: python:3.8.10
@@ -26,6 +42,8 @@ jobs:
           POSTGRES_PASSWORD: password
           POSTGRES_DB: library_db
           POSTGRES_HOST_AUTH_METHOD: trust
+          POSTGRES_HOST: db
+          POSTGRES_PORT: 5432
 
     steps:
       - uses: actions/checkout@v3
@@ -59,3 +77,5 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: password
           POSTGRES_DB: library_db
+          POSTGRES_HOST: db
+          POSTGRES_PORT: 5432
